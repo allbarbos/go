@@ -1,14 +1,17 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
+	"io"
 	"net/http"
 	"os"
+	"strings"
 	"time"
 )
 
-const MONITORING = 2
-const DELAY = 5
+const monitor = 2
+const delay = 5
 
 func main() {
 	for {
@@ -41,27 +44,52 @@ func option() int {
 }
 
 func monitoring() {
-	sites := []string{
-		"https://random-status-code.herokuapp.com",
-		"https://g1.globo.com",
-		"https://resultadosdigitais.com.br",
-	}
+	sites := readSitesFile()
 
-	for i := 0; i < MONITORING; i++ {
+	for i := 0; i < monitor; i++ {
 		for _, site := range sites {
 			ping(site)
 		}
-		time.Sleep(DELAY * time.Second)
+		time.Sleep(delay * time.Second)
 		fmt.Println("")
 	}
 }
 
 func ping(site string) {
 	fmt.Println("ping", site)
-	resp, _ := http.Get(site)
+	resp, err := http.Get(site)
+	if err != nil {
+		fmt.Println("[ERROR]", err)
+	}
 	if resp.StatusCode == 200 {
 		fmt.Println("status up")
 	} else {
 		fmt.Println("status DOWN")
 	}
+}
+
+func readSitesFile() []string {
+	var sites []string
+
+	file, err := os.Open("sites.txt")
+	//file, err := ioutil.ReadFile("sites.txt")
+
+	if err != nil {
+		fmt.Println("[ERROR]", err)
+	}
+
+	reader := bufio.NewReader(file)
+
+	for {
+		row, err := reader.ReadString('\n')
+		row = strings.TrimSpace(row)
+		sites = append(sites, row)
+		if err == io.EOF {
+			break
+		}
+	}
+
+	file.Close()
+
+	return sites
 }
