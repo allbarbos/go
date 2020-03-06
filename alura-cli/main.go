@@ -4,8 +4,10 @@ import (
 	"bufio"
 	"fmt"
 	"io"
+	"io/ioutil"
 	"net/http"
 	"os"
+	"strconv"
 	"strings"
 	"time"
 )
@@ -21,7 +23,7 @@ func main() {
 		case 1:
 			monitoring()
 		case 2:
-			fmt.Println("Exibindo...")
+			printLog()
 		case 0:
 			os.Exit(0)
 		default:
@@ -62,8 +64,10 @@ func ping(site string) {
 		fmt.Println("[ERROR]", err)
 	}
 	if resp.StatusCode == 200 {
+		logging(site, true)
 		fmt.Println("status up")
 	} else {
+		logging(site, false)
 		fmt.Println("status DOWN")
 	}
 }
@@ -92,4 +96,23 @@ func readSitesFile() []string {
 	file.Close()
 
 	return sites
+}
+
+func logging(site string, status bool) {
+	file, err := os.OpenFile("log.txt", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	file.WriteString(time.Now().Format("2006-01-02 15:04:05") + " " + site + " - online: " + strconv.FormatBool(status) + "\n")
+
+	file.Close()
+}
+
+func printLog() {
+	file, err := ioutil.ReadFile("log.txt")
+	if err != nil {
+		fmt.Println("[ERROR]", err)
+	}
+	fmt.Println(string(file))
 }

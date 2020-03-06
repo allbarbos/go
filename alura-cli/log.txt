@@ -1,0 +1,6 @@
+2020-03-06 00:39:21 https://random-status-code.herokuapp.com - online: true
+2020-03-06 00:39:21 https://g1.globo.com - online: true
+2020-03-06 00:39:22 https://resultadosdigitais.com.br - online: true
+2020-03-06 00:39:27 https://random-status-code.herokuapp.com - online: false
+2020-03-06 00:39:28 https://g1.globo.com - online: true
+2020-03-06 00:39:28 https://resultadosdigitais.com.br - online: true
