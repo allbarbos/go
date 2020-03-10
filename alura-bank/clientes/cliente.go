@@ -1,7 +1,6 @@
 package clientes
 
+// Titular representa a entidade
 type Titular struct {
-	Nome      string
-	Cpf       string
-	Profissao string
+	Nome, Cpf, Profissao string
 }

@@ -8,10 +8,9 @@ import (
 
 // ContaCorrente é a entidade
 type ContaCorrente struct {
-	Titular clientes.Titular
-	Agencia int
-	Conta   int
-	saldo   float64
+	Titular        clientes.Titular
+	Agencia, Conta int
+	saldo          float64
 }
 
 // Sacar subtrai o valor da conta caso haja saldo
