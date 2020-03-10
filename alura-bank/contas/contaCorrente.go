@@ -1,10 +1,14 @@
 package contas
 
-import "fmt"
+import (
+	"fmt"
+
+	"github.com/go/alura-bank/clientes"
+)
 
 // ContaCorrente é a entidade
 type ContaCorrente struct {
-	Titular string
+	Titular clientes.Titular
 	Agencia int
 	Conta   int
 	Saldo   float64
