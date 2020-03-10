@@ -18,7 +18,7 @@ func conectaDb() *sql.DB {
 }
 
 type Produto struct {
-	Id, Quantidade  int
+	ID, Quantidade  int
 	Nome, Descricao string
 	Preco           float64
 }
@@ -52,7 +52,7 @@ func index(w http.ResponseWriter, r *http.Request) {
 			panic(err.Error())
 		}
 
-		p.Id = id
+		p.ID = id
 		p.Nome = nome
 		p.Descricao = descricao
 		p.Preco = preco
