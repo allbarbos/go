@@ -31,12 +31,27 @@ func (c *ContaCorrente) Depositar(valorDeposito float64) (string, float64) {
 	return "depósito não aceito", c.saldo
 }
 
+// Transferir envia um valor para a conta destino
+func (c *ContaCorrente) Transferir(valor float64, contaDestino *ContaCorrente) bool {
+	if valor > c.saldo && valor < 0 {
+		return false
+	}
+
+	c.Transferir(valor, contaDestino)
+	return true
+}
+
 func main() {
 	ccAllan := ContaCorrente{"Allan", 0001, 123456, 600}
+	ccBile := ContaCorrente{"Bile", 0001, 654321, 100}
 
-	fmt.Println(ccAllan.saldo)
-	ccAllan.Sacar(300)
-	fmt.Println(ccAllan.saldo)
-	status, saldo := ccAllan.Depositar(100)
-	fmt.Println(status, "- saldo atual R$", saldo)
+	fmt.Println(ccAllan.saldo, ccBile.saldo)
+	ccAllan.Transferir(50, &ccBile)
+	fmt.Println(ccAllan.saldo, ccBile.saldo)
+
+	// fmt.Println(ccAllan.saldo)
+	// ccAllan.Sacar(300)
+	// fmt.Println(ccAllan.saldo)
+	// status, saldo := ccAllan.Depositar(100)
+	// fmt.Println(status, "- saldo atual R$", saldo)
 }
