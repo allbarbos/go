@@ -1,6 +1,6 @@
 package models
 
-import "github.com/allbarbos/go/alura-web/db"
+import "github.com/allbarbos/go/loja-web/db"
 
 // Produto representa a entidade
 type Produto struct {

@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/allbarbos/go/alura-web/models"
+	"github.com/allbarbos/go/loja-web/models"
 )
 
 var tmpl = template.Must(template.ParseGlob("templates/*.html"))

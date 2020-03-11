@@ -1,10 +1,8 @@
 FROM golang:alpine
-WORKDIR /go/src/github.com/allbarbos/go/alura-web
+WORKDIR /go/src/github.com/allbarbos/go/loja-web
 ENV GOPATH /go
-COPY . /go/src/github.com/allbarbos/go/alura-web/
-
-RUN apk add git
-
-RUN go get github.com/lib/pq
-RUN go build -o main .
-CMD ["/go/src/github.com/allbarbos/go/alura-web/main"]
+COPY . /go/src/github.com/allbarbos/go/loja-web
+RUN apk add git && \
+    go get github.com/lib/pq && \
+    go build -o main .
+CMD ["/go/src/github.com/allbarbos/go/loja-web/main"]

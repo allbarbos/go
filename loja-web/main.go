@@ -3,7 +3,7 @@ package main
 import (
 	"net/http"
 
-	"github.com/allbarbos/go/alura-web/routes"
+	"github.com/allbarbos/go/loja-web/routes"
 )
 
 func main() {

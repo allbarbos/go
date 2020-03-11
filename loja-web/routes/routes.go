@@ -3,7 +3,7 @@ package routes
 import (
 	"net/http"
 
-	"github.com/allbarbos/go/alura-web/controllers"
+	"github.com/allbarbos/go/loja-web/controllers"
 )
 
 // Load carrega todas as rotas da aplicação
