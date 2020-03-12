@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/allbarbos/go/alura-web/routes"
@@ -8,5 +9,9 @@ import (
 
 func main() {
 	routes.Load()
-	http.ListenAndServe(":8000", nil)
+	fmt.Println("listen port 8000")
+	err := http.ListenAndServe(":8000", nil)
+	if err != nil {
+		panic(err.Error())
+	}
 }

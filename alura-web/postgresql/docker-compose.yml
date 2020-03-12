@@ -15,10 +15,10 @@ services:
   db-admin:
     image: dpage/pgadmin4
     environment:
-      PGADMIN_DEFAULT_EMAIL: "bile@bile.com"
+      PGADMIN_DEFAULT_EMAIL: "bile"
       PGADMIN_DEFAULT_PASSWORD: "bile"
     ports:
-      - "16543:80"
+      - "8001:80"
     depends_on:
       - db
     networks:
