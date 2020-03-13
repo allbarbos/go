@@ -14,7 +14,7 @@ func GetAllProducts() []Produto {
 	db := db.Connection()
 	defer db.Close()
 
-	getAll, err := db.Query("SELECT id, nome, descricao, preco, quantidade FROM public.produtos;")
+	getAll, err := db.Query("SELECT id, nome, descricao, preco, quantidade FROM public.produtos order by id asc;")
 	if err != nil {
 		panic(err.Error())
 	}
@@ -43,6 +43,36 @@ func GetAllProducts() []Produto {
 	return produtos
 }
 
+func GetProduct(id string) Produto {
+	db := db.Connection()
+	defer db.Close()
+
+	result, err := db.Query("SELECT id, nome, descricao, preco, quantidade FROM public.produtos where id=$1;", id)
+	if err != nil {
+		panic(err.Error())
+	}
+
+	p := Produto{}
+
+	for result.Next() {
+		var id, quantidade int
+		var nome, descricao string
+		var preco float64
+
+		err = result.Scan(&id, &nome, &descricao, &preco, &quantidade)
+		if err != nil {
+			panic(err.Error())
+		}
+
+		p.ID = id
+		p.Nome = nome
+		p.Descricao = descricao
+		p.Preco = preco
+		p.Quantidade = quantidade
+	}
+	return p
+}
+
 func CreateProduct(nome, descricao string, preco float64, quantidade int) {
 	db := db.Connection()
 	defer db.Close()
@@ -63,4 +93,16 @@ func DeleteProduct(id string) {
 		panic(err.Error())
 	}
 	query.Exec(id)
+}
+
+func UpdateProduct(id, quantidade int, nome, descricao string, preco float64) {
+	db := db.Connection()
+	defer db.Close()
+
+	query, err := db.Prepare("update produtos set nome=$1, descricao=$2, preco=$3, quantidade=$4 where id=$5")
+	if err != nil {
+		panic(err.Error())
+	}
+
+	query.Exec(nome, descricao, preco, quantidade, id)
 }
