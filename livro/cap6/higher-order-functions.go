@@ -1,4 +1,4 @@
-package main
+package higherorder
 
 import (
 	"fmt"
@@ -24,7 +24,7 @@ func GerarFibonacci(n int) func() {
 	}
 }
 
-func main() {
+func higherorder() {
 	Cronometrar(GerarFibonacci(8))
 	Cronometrar(GerarFibonacci(48))
 	Cronometrar(GerarFibonacci(88))
