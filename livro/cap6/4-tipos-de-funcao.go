@@ -1,4 +1,4 @@
-package main
+package tiposfuncao
 
 import "fmt"
 
@@ -28,7 +28,7 @@ func CalcularProduto(valores []int) int {
 	return Agregar(valores, 1, multiplicacao)
 }
 
-func main() {
+func tiposfuncao() {
 	valores := []int{3, -2, 5, 7, 8, 22, 32, -1}
 	fmt.Println(CalcularSoma(valores))
 	fmt.Println(CalcularProduto(valores))
