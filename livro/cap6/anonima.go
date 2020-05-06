@@ -1,4 +1,4 @@
-package main
+package anonima
 
 import (
 	"fmt"
@@ -6,7 +6,7 @@ import (
 	"strings"
 )
 
-func main() {
+func anonima() {
 	expr := regexp.MustCompile("\\b\\w")
 	transformadora := func(s string) string {
 		return strings.ToUpper(s)
